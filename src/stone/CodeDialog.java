@@ -1,4 +1,4 @@
-package chap3;
+package stone;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
