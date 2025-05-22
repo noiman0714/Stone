@@ -1,15 +1,20 @@
 package stone;
-import static stone.Parser.rule;
+import static stone.Parser.*;
 
 import java.util.HashSet;
-
-import javax.swing.text.html.parser.Parser;
 
 import stone.Parser.Operators;
 import stone.ast.ASTree;
 import stone.ast.BinaryExpr;
+import stone.ast.BlockStmnt;
+import stone.ast.IfStmnt;
 import stone.ast.Name;
+import stone.ast.NegativeExpr;
+import stone.ast.NullStmnt;
 import stone.ast.NumberLiteral;
+import stone.ast.PrimaryExpr;
+import stone.ast.StringLiteral;
+import stone.ast.WhileStmnt;
 
 public class BasicParser {
 	HashSet<String> reserved = new HashSet<String>();
@@ -25,12 +30,12 @@ public class BasicParser {
 	Parser expr = expr0.expression(BinaryExpr.class,factor,operators);
 	
 	Parser statement0 = rule();
-	Parser block = rule(BlockStmnt)
+	Parser block = rule(BlockStmnt.class)
 			.sep("{").option(statement0)
 			.repeat(rule().sep(";",Token.EOL).option(statement0))
 			.sep("}");
 	Parser simple = rule(PrimaryExpr.class).ast(expr);
-	Parser statemetnt = statement0.or(
+	Parser statement = statement0.or(
 			rule(IfStmnt.class).sep("if").ast(expr).ast(block)
 								.option(rule().sep("else").ast(block)),
 			rule(WhileStmnt.class).sep("while").ast(expr).ast(block),
