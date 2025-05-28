@@ -30,7 +30,7 @@ public class Lexer {
 	
 	public Token peek(int i) throws ParseException{
 		if(fillQueue(i))
-			return queue.remove(i);
+			return queue.get(i);
 		else
 			return Token.EOF;
 	}
@@ -67,7 +67,7 @@ public class Lexer {
 				pos = matcher.end();
 			}
 			else
-				throw new ParseException("bad token at line");
+				throw new ParseException("bad token at line" + lineNo);
 		}
 		queue.add(new IdToken(lineNo,Token.EOL));
 	}
