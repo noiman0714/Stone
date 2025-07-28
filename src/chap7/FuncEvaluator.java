@@ -1,12 +1,19 @@
 package chap7;
 import java.util.List;
-import javassist.gluonj.*;
-import stone.StoneException;
-import stone.ast.*;
+
 import chap6.BasicEvaluator;
-import chap6.Environment;
 import chap6.BasicEvaluator.ASTreeEx;
 import chap6.BasicEvaluator.BlockEx;
+import chap6.Environment;
+import javassist.gluonj.Require;
+import javassist.gluonj.Reviser;
+import stone.StoneException;
+import stone.ast.ASTree;
+import stone.ast.Arguments;
+import stone.ast.DefStmnt;
+import stone.ast.ParameterList;
+import stone.ast.Postfix;
+import stone.ast.PrimaryExpr;
 
 @Require(BasicEvaluator.class)
 @Reviser public class FuncEvaluator {
